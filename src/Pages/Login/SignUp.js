@@ -47,7 +47,7 @@ const SignUp = () => {
         <div className='flex justify-center items-center h-fit mt-8'>
             <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
-                    <h2 className="card-title justify-center">Sign Up</h2>
+                    <h2 className="card-title justify-center text-3xl font-bold text-primary">Sign Up</h2>
 
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <input />
@@ -128,7 +128,7 @@ const SignUp = () => {
                         <input className='btn btn-wide w-full text-white' type="submit" value="SignUp" />
                     </form>
 
-                    <p className='mt-5'><small>Already User? <Link className='text-secondary' to='/login'>Please Login</Link></small></p>
+                    <p className='mt-5'><small>Already User? <Link className='text-primary font-bold' to='/login'>Please Login</Link></small></p>
 
                     <div className="divider">OR</div>
                     <button
