@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Amg Performance Steering Wheel",
+        "price": "1,690",
+        "minOrder": "50",
+        "quantity": "5000",
+        "description": "AMG multifunction sports steering wheel. 3-spoke design- flattened at top and bottom- with aluminium shift paddles. Black nappa leather- perforated in grip area",
+        "img": "https://i.ibb.co/YbjX5PB/ezgif-com-gif-maker.jpg"
+    },
+    {
+        "name": "Rolls-Royce Logo",
+        "price": "259",
+        "minOrder": "100",
+        "quantity": "10000",
+        "description": "Its a logo for Rolls Royce cars. Its same to same original quality with custome color.",
+        "img": "https://i.ibb.co/PQVPf2V/Rolls-Royce-Logo-2.jpg"
+    },
+    {
+        "name": "Wheel Bearings for BMW",
+        "price": "321",
+        "minOrder": "50",
+        "quantity": "10000",
+        "description": "Wheel bearings hold your wheels on and allow them to spin properly. They are an extremely important component of your vehicle.",
+        "img": "https://i.ibb.co/CQ23Pp1/wheel-bearings.jpg"
+    }
+]

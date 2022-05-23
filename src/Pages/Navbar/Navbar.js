@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
 
     const menuItems = <>
-        <li className='text-lg text-primary'><Link to={'/home'}>Home</Link></li>
-        <li className='text-lg text-primary'><Link to={'/purchase'}>Purchase</Link></li>
+        <li className='text-lg text-white'><Link to={'/home'}>Home</Link></li>
+        <li className='text-lg text-white'><Link to={'/purchase'}>Purchase</Link></li>
+        <li className='text-lg text-white'><Link to={'/blog'}>Blog</Link></li>
     </>
 
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-primary">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -19,7 +20,7 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link to='/home' className="btn btn-ghost normal-case text-3xl text-primary">Luxury Car Parts Corner</Link>
+                <Link to='/home' className="btn btn-ghost normal-case text-3xl text-white">Luxury Car Parts Corner</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
