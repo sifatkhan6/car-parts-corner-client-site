@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import auth from '../../firebase.init';
 import './Purchase.css'
 
 const Purchase = () => {
 
     const { productID } = useParams();
 
+    const [user] = useAuthState(auth);
     const [product, setProduct] = useState({});
     // const [isReload, setIsReload] = useState(false);
 
@@ -18,54 +21,42 @@ const Purchase = () => {
             .then(data => setProduct(data));
     }, []);
 
-    // decreasing quantity 
-    // const handleDavivered = (id) => {
-    //     const quantity = product.quantity;
-    //     let newQuantity = quantity - 1;
-    //     const newProduct = { ...product, quantity: newQuantity };
-    //     setProduct(newProduct);
-    //     if (newQuantity > -1) {
-    //         const url = `http://localhost:5000/products/${id}`;
-    //         fetch(url, {
-    //             method: 'PUT',
-    //             headers: {
-    //                 'content-type': 'application/json'
-    //             },
-    //             body: JSON.stringify(newProduct)
-    //         })
-    //             .then(res => res.json())
-    //             .then(data => setIsReload(!isReload));
-    //     }
-    // }
+    const handleBooking = event => {
+        event.preventDefault();
 
-    // updating stock 
-    // const handleUpdateStock = event => {
-    //     event.preventDefault();
+        const booking = {
+            productID: product._id,
+            productName: product.name,
+            price: product.price,
+            quantity: event.target.quantity.value,
+            clientEmail: user.email,
+            clientName: user.displayName,
+            phone: event.target.number.value,
+            address: event.target.address.value,
+        }
 
-    //     const stock = event.target.AddQuantity.value;
-    //     const newStock = parseInt(stock);
-    //     const oldStock = parseInt(product.quantity);
-    //     const restock = oldStock + newStock;
-    //     const newProduct = { ...product, quantity: restock };
-
-    //     const url = `http://localhost:5000/products/${productId}`;
-    //     fetch(url, {
-    //         method: 'PUT',
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(newProduct)
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setIsReload(!isReload);
-    //             event.target.reset();
-    //         })
-    //     toast('Quantity Added Successfully.')
-    // }
+        fetch('http://localhost:5000/booking', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    // toast(`You Have Ordred Successfully.`)
+                }
+                else {
+                    // toast.error(`Order Not Complete Yet!!!`)
+                }
+                // for cleaning the modal 
+                // setTreatment(null);
+            });
+    }
 
     return (
-        <div className=''>
+        <div className='mx-4'>
             <div className='inventorySection'>
                 <div className=''>
                     <img src={product.img} alt="" />
@@ -78,18 +69,25 @@ const Purchase = () => {
                     <h6 className='text-base text-primary font-bold mt-2'>Minimum Order: {product.minOrder}</h6>
                     <h6 className='text-base text-primary font-bold mt-2'>Quantity: {product.quantity}</h6>
                     <h6><small></small></h6>
-                    {/* <button className='btn btn-secondary mt-4' onClick={() => handleDavivered(productID)}>Delivered</button> */}
                 </div>
             </div>
 
-            {/* <div className='text-center mt-5 mx-auto w-25'>
-                <form className='d-flex flex-column' onSubmit={handleUpdateStock}>
-                    <input className='mb-2' type="number" name="AddQuantity" placeholder='Add Quantity' id="" />
-                    <div className='text-center'>
-                        <input className='btn btn-success w-50' type="submit" value="Add Quantity" />
-                    </div>
+            <div>
+                <form className='grid grid-cols-1 gap-3 mt-6 justify-items-center' onSubmit={handleBooking}>
+                    <input type="text" name='name' disabled value={user?.displayName || ''} className="input input-bordered input-secondary w-full max-w-xs" />
+
+                    <input type="email" name='email' disabled value={user?.email || ''} className="input input-bordered input-secondary w-full max-w-xs" />
+
+                    <input type="number" name='quantity' value={product.minOrder} className="input input-bordered input-secondary w-full max-w-xs" required />
+
+                    <input type="text" name='number' placeholder="Phone Number" className="input input-bordered input-secondary w-full max-w-xs" required />
+
+                    <input type="text" name='address' placeholder="Address" className="input input-bordered input-secondary w-full max-w-xs" required />
+
+                    <input type="submit" value="Purchase" className="btn btn-primarybtn btn-primary text-white font-bold w-full max-w-xs" />
                 </form>
-            </div> */}
+            </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };
