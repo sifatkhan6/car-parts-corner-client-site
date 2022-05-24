@@ -15,7 +15,6 @@ const Navbar = () => {
 
     const menuItems = <>
         <li className='text-lg text-white'><Link to={'/home'}>Home</Link></li>
-        <li className='text-lg text-white'><Link to={'/purchase'}>Purchase</Link></li>
         <li className='text-lg text-white'><Link to={'/blog'}>Blog</Link></li>
         <li className='text-lg text-white'>{user ? <button onClick={logout}>Sign Out</button> : <Link to={'/login'}>Login</Link>}</li>
     </>

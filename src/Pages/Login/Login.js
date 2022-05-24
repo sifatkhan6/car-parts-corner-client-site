@@ -21,9 +21,9 @@ const Login = () => {
     // const [token] = useToken(user || gUser);
 
     let signInError;
-    // let navigate = useNavigate();
-    // let location = useLocation();
-    // let from = location.state?.from?.pathname || "/";
+    let navigate = useNavigate();
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/";
 
     // useEffect(() => {
     //     if (token) {
@@ -31,13 +31,13 @@ const Login = () => {
     //     }
     // }, [token, from, navigate])
 
-    // if (loading || gLoading) {
-    //     return <Loading></Loading>
-    // }
+    if (loading || gLoading) {
+        return <Loading></Loading>
+    }
 
-    // if (error || gError) {
-    //     signInError = <p className='text-red-500'><small>{error?.message || gError?.message}</small></p>
-    // }
+    if (error || gError) {
+        signInError = <p className='text-red-500'><small>{error?.message || gError?.message}</small></p>
+    }
 
     const onSubmit = data => {
         signInWithEmailAndPassword(data.email, data.password);
@@ -105,7 +105,7 @@ const Login = () => {
                             </label>
                         </div>
                         {signInError}
-                        <input className='btn btn-wide w-full text-white' type="submit" value="Login" />
+                        <input className='btn btn-wide btn-primary w-full text-white' type="submit" value="Login" />
                     </form>
 
                     <p className='mt-5'><small>New to Doctors Portal? <Link className='text-primary font-bold' to='/signup'>Create new account</Link></small></p>
@@ -113,7 +113,7 @@ const Login = () => {
                     <div className="divider">OR</div>
                     <button
                         onClick={() => signInWithGoogle()}
-                        className="btn btn-outline"
+                        className="btn btn-outline btn-primary"
                     >Continue With Google</button>
                 </div>
             </div>
