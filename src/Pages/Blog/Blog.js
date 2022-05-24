@@ -3,7 +3,7 @@ import './Blog.css'
 
 const Blog = () => {
     return (
-        <div className='mx-6'>
+        <div className='mx-6 my-12'>
             <div className='quesBody '>
                 <h2 className='text-2xl font-bold'>Que-1: How will you improve the performance of a React Application?</h2>
                 <br />
