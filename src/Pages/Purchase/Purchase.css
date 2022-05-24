@@ -1,0 +1,19 @@
+.inventorySection{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 5%;
+    border: 1.5px solid #170131;
+    border-radius: 20px;
+}
+
+.inventorySection img{
+    width: 100%;
+    padding: 2%;
+    border-radius: 30px;
+}
+
+.inventoryDetails{
+    margin-left: 15%;
+    margin-top: 3%;
+    padding: 2%;
+}
