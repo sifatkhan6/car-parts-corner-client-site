@@ -14,7 +14,7 @@ const Dashboard = () => {
         <div className="drawer drawer-mobile">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col sm:justify-items-center">
-                <h2 className='text-primary font-bold text-4xl text-center mt-6'>Dashboard</h2>
+                <h2 className='text-primary font-bold text-4xl text-center mt-4'>Welcome to Dashboard</h2>
                 <Outlet></Outlet>
             </div>
             <div className="drawer-side">
@@ -24,7 +24,7 @@ const Dashboard = () => {
                     <li><Link to={'/dashboard'}>My Profile</Link></li>
                     <li><Link to={'/dashboard/orders'}>My Orders</Link></li>
                     <li><Link to={'/dashboard/reviews'}>My Reviews</Link></li>
-                    {admin && <li><Link to={'/dashboard/users'}>All Users</Link></li>}
+                    {admin && <li><Link to={'/dashboard/users'}>Make Admin</Link></li>}
                 </ul>
 
             </div>

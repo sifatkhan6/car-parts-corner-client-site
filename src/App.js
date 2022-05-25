@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Blog from './Pages/Blog/Blog';
 import Dashboard from './Pages/Dashboard/Dashboard';
@@ -13,6 +14,8 @@ import Purchase from './Pages/Purchase/Purchase';
 import MyProfile from './Pages/Dashboard/MyProfile';
 import MyOders from './Pages/Dashboard/MyOrders'
 import MyReviews from './Pages/Dashboard/MyReviews'
+import AllUsers from './Pages/Dashboard/AllUsers';
+import RequireAdmin from './Pages/Login/RequireAdmin'
 
 function App() {
   return (
@@ -33,12 +36,13 @@ function App() {
           <Route index element={<MyProfile></MyProfile>}></Route>
           <Route path='/dashboard/orders' element={<MyOders></MyOders>}></Route>
           <Route path='/dashboard/reviews' element={<MyReviews></MyReviews>}></Route>
+          <Route path='/dashboard/users' element={<RequireAdmin><AllUsers></AllUsers></RequireAdmin>}></Route>
         </Route>
         <Route path='/blog' element={<Blog></Blog>}></Route>
       </Routes>
 
-      <Footer></Footer>
       <ToastContainer></ToastContainer>
+      <Footer></Footer>
     </div>
   );
 }

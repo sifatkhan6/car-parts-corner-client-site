@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import './Purchase.css'
 
@@ -15,7 +15,6 @@ const Purchase = () => {
 
     useEffect(() => {
         const url = `http://localhost:5000/products/${productID}`;
-        console.log(url);
         fetch(url)
             .then(res => res.json())
             .then(data => setProduct(data));
@@ -45,13 +44,14 @@ const Purchase = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                    // toast(`You Have Ordred Successfully.`)
+                    toast.success(`You Have Ordred Successfully.`)
                 }
                 else {
-                    // toast.error(`Order Not Complete Yet!!!`)
+                    toast.error(`You Already Have Same Order on process...`)
                 }
                 // for cleaning the modal 
                 // setTreatment(null);
+                event.target.reset();
             });
     }
 
@@ -73,7 +73,7 @@ const Purchase = () => {
             </div>
 
             <div>
-                <form className='grid grid-cols-1 gap-3 mt-6 justify-items-center' onSubmit={handleBooking}>
+                <form className='grid grid-cols-1 gap-3 my-6 justify-items-center' onSubmit={handleBooking}>
                     <input type="text" name='name' disabled value={user?.displayName || ''} className="input input-bordered input-secondary w-full max-w-xs" />
 
                     <input type="email" name='email' disabled value={user?.email || ''} className="input input-bordered input-secondary w-full max-w-xs" />
@@ -87,7 +87,6 @@ const Purchase = () => {
                     <input type="submit" value="Purchase" className="btn btn-primarybtn btn-primary text-white font-bold w-full max-w-xs" />
                 </form>
             </div>
-            <ToastContainer></ToastContainer>
         </div>
     );
 };
