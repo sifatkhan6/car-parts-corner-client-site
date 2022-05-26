@@ -7,7 +7,7 @@ const AllUsers = () => {
 
     const { data: users, isLoading, refetch } = useQuery('users', () => fetch('http://localhost:5000/user', {
         method: 'GET',
-        headers:{
+        headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
     }).then(res => res.json()))
@@ -18,6 +18,7 @@ const AllUsers = () => {
 
     return (
         <div>
+            <h2 className='text-primary font-bold text-2xl text-center mt-8'>All Users</h2>
             <div className="overflow-x-auto mt-6">
                 <table className="table table-zebra w-full">
                     <thead>

@@ -8,7 +8,7 @@ const UserRow = ({ user, index, refetch }) => {
     const makeAdmin = () => {
         fetch(`http://localhost:5000/user/admin/${email}`, {
             method: 'PUT',
-            authorizatio: `Bearer ${localStorage.getItem('accessToken')}`
+            headers: {authorization: `Bearer ${localStorage.getItem('accessToken')}`}
         })
             .then(res => {
                 if (res.status === 403) {
@@ -28,7 +28,7 @@ const UserRow = ({ user, index, refetch }) => {
         <tr>
             <th>{index + 1}</th>
             <td>{email}</td>
-            <td>{role !== 'admin' ? <button onClick={makeAdmin} className="btn btn-xs text-white">Make Admin</button> : <button className='btn btn-xs text-secondary'>Admin</button>}</td>
+            <td>{role !== 'admin' ? <button onClick={makeAdmin} className="btn btn-xs text-white">Make Admin</button> : <button className='btn btn-xs text-green-400'>Admin</button>}</td>
             <td><button className="btn btn-xs text-white">Delete User</button></td>
         </tr>
     );

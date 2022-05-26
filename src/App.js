@@ -6,8 +6,8 @@ import Blog from './Pages/Blog/Blog';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Footer from './Pages/Footer/Footer';
 import Home from './Pages/Home/Home';
-import Login from './Pages/Login/Login';
 import RequireAuth from './Pages/Login/RequireAuth';
+import Login from './Pages/Login/Login'
 import SignUp from './Pages/Login/SignUp';
 import Navbar from './Pages/Navbar/Navbar';
 import Purchase from './Pages/Purchase/Purchase';
@@ -36,13 +36,12 @@ function App() {
           <Route index element={<MyProfile></MyProfile>}></Route>
           <Route path='/dashboard/orders' element={<MyOders></MyOders>}></Route>
           <Route path='/dashboard/reviews' element={<MyReviews></MyReviews>}></Route>
-          <Route path='/dashboard/users' element={<RequireAdmin><AllUsers></AllUsers></RequireAdmin>}></Route>
+          <Route path='/dashboard/users' element={<AllUsers></AllUsers>}></Route>
         </Route>
         <Route path='/blog' element={<Blog></Blog>}></Route>
       </Routes>
-
-      <ToastContainer></ToastContainer>
       <Footer></Footer>
+      <ToastContainer></ToastContainer>
     </div>
   );
 }

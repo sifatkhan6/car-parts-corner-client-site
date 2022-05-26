@@ -33,27 +33,30 @@ const MyOrders = () => {
     }, [user])
 
     return (
-        <div className="overflow-x-auto mt-6">
-            <table className="table w-full">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        products.map((product, index) => <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{product.productName}</td>
-                            <td>${product.price}</td>
-                            <td>{product.quantity} pcs</td>
-                        </tr>)
-                    }
-                </tbody>
-            </table>
+        <div>
+            <h2 className='text-2xl font-bold text-center text-primary mt-8'>My Order</h2>
+            <div className="overflow-x-auto mt-4">
+                <table className="table w-full">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            products.map((product, index) => <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{product.productName}</td>
+                                <td>${product.price}</td>
+                                <td>{product.quantity} pcs</td>
+                            </tr>)
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

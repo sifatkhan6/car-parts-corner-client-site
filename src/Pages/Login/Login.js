@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useToken from '../Hooks/useToken';
-// import useToken from '../Hooks/useToken';
 
 
 const Login = () => {
@@ -32,9 +31,11 @@ const Login = () => {
         }
     }, [token, from, navigate])
 
-    if (user || gUser) {
-        navigate(from, { replace: true });
-    }
+    useEffect(() => {
+        if (user || gUser) {
+            navigate(from, { replace: true });
+        }
+    }, [user, gUser])
 
     if (loading || gLoading) {
         return <Loading></Loading>

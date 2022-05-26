@@ -5,20 +5,26 @@ import auth from '../../firebase.init';
 const MyProfile = () => {
 
     const [user] = useAuthState(auth);
-    console.log(user)
 
     return (
-        <div className='flex items-center justify-center'>
-            <div class="avatar">
-                <div class="w-40 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 mr-12">
-                    <img src={user.photoUrl} alt=''/>
-                </div>
+        <div>
+            <h2 className='text-2xl font-bold text-primary text-center mt-8'>My Profile</h2>
+                <form className='grid grid-cols-1 gap-3 my-6 justify-items-center' >
+                    <input type="text" name='name' disabled value={user?.displayName || ''} className="input input-bordered input-secondary w-full max-w-xs" />
+
+                    <input type="email" name='email' disabled value={user?.email || ''} className="input input-bordered input-secondary w-full max-w-xs"/>
+
+                    <input type="number" name='quantity' placeholder='Education' className="input input-bordered input-secondary w-full max-w-xs"/>
+
+                    <input type="text" name='number' placeholder="Phone Number" className="input input-bordered input-secondary w-full max-w-xs"/>
+
+                    <input type="text" name='address' placeholder="Full Address" className="input input-bordered input-secondary w-full max-w-xs"/>
+
+                    <input type="text" name='address' placeholder="LinkedIn Profile Link" className="input input-bordered input-secondary w-full max-w-xs"/>
+
+                    <input type="submit" value="Update" className="btn btn-primarybtn btn-primary text-white font-bold w-full max-w-xs" />
+                </form>
             </div>
-            <div className=''>
-                <h2>Name: {user.displayName}</h2>
-                <h2>Email: {user.email}</h2>
-            </div>
-        </div>
     );
 };
 
