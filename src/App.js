@@ -16,6 +16,10 @@ import MyOders from './Pages/Dashboard/MyOrders'
 import MyReviews from './Pages/Dashboard/MyReviews'
 import AllUsers from './Pages/Dashboard/AllUsers';
 import RequireAdmin from './Pages/Login/RequireAdmin'
+import PageNotFound from './Pages/PageNotFound/PageNotFound';
+import AddProduct from './Pages/Dashboard/AddProduct';
+import ManageProducts from './Pages/Dashboard/ManageProducts';
+import ManageAllOrders from './Pages/Dashboard/ManageAllOrders';
 
 function App() {
   return (
@@ -36,9 +40,13 @@ function App() {
           <Route index element={<MyProfile></MyProfile>}></Route>
           <Route path='/dashboard/orders' element={<MyOders></MyOders>}></Route>
           <Route path='/dashboard/reviews' element={<MyReviews></MyReviews>}></Route>
-          <Route path='/dashboard/users' element={<AllUsers></AllUsers>}></Route>
+          <Route path='/dashboard/users' element={<RequireAdmin><AllUsers></AllUsers></RequireAdmin>}></Route>
+          <Route path='/dashboard/addProduct' element={<RequireAdmin><AddProduct></AddProduct></RequireAdmin>}></Route>
+          <Route path='/dashboard/manageProducts' element={<RequireAdmin><ManageProducts></ManageProducts></RequireAdmin>}></Route>
+          <Route path='/dashboard/manageAllOrders' element={<RequireAdmin><ManageAllOrders></ManageAllOrders></RequireAdmin>}></Route>
         </Route>
         <Route path='/blog' element={<Blog></Blog>}></Route>
+        <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
       </Routes>
       <Footer></Footer>
       <ToastContainer></ToastContainer>
