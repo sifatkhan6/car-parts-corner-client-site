@@ -25,7 +25,7 @@ const AddProduct = () => {
             .then(response => {
                 const { data } = response;
                 if (data.insertedId) {
-                    toast('Product Added');
+                    toast.success('Product Added');
                     event.target.reset();
                 }
             })

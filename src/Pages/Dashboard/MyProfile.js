@@ -7,26 +7,38 @@ const MyProfile = () => {
 
     const [user] = useAuthState(auth);
 
-    const [updateProfile, setUpdateProfile] = useState({});
+    const [updateProfile, setUpdateProfile] = useState([]);
+
+    const {education} = {updateProfile};
+
+    console.log(education)
 
     useEffect(() => {
-        const url = `http://localhost:5000/user`;
-        fetch(url)
-            .then(res => res.json())
-            .then(data => setUpdateProfile(data));
-    }, []);
+        if (user) {
+            fetch(`http://localhost:5000/showUpdateProfile/${user.email}`, {
+                method: 'GET',
+                headers: {
+                    'authorization': `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setUpdateProfile(data)
+                })
+        }
+    }, [user])
 
     const handleUpdateProfile = event => {
         event.preventDefault();
 
         const Profile = {
             education: event.target.education.value,
-            phone: event.target.number.value,
+            phone: event.target.phone.value,
             address: event.target.address.value,
             linkedIn: event.target.linkedIn.value,
         }
 
-        fetch('http://localhost:5000/booking', {
+        fetch(`http://localhost:5000/updateProfile/${user.email}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'
@@ -36,14 +48,11 @@ const MyProfile = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                    toast.success(`You Have Ordred Successfully.`)
+                    toast.success(`Successfully Updated Your Profile!`)
                 }
                 else {
-                    toast.error(`You Already Have Same Order on process...`)
+                    toast.error(`Failed to Update...`)
                 }
-                // for cleaning the modal 
-                // setTreatment(null);
-                event.target.reset();
             });
     }
 
@@ -55,13 +64,13 @@ const MyProfile = () => {
 
                 <input type="email" name='email' disabled value={user?.email || ''} className="input input-bordered input-secondary w-full max-w-xs" />
 
-                <input type="text" name='education' placeholder='Education' className="input input-bordered input-secondary w-full max-w-xs" />
+                <input type="text" name='education' placeholder={updateProfile?.education} className="input input-bordered input-secondary w-full max-w-xs" />
 
-                <input type="number" name='number' placeholder="Phone Number" className="input input-bordered input-secondary w-full max-w-xs" />
+                <input type="number" name='phone' placeholder={updateProfile?.number} className="input input-bordered input-secondary w-full max-w-xs" />
 
-                <input type="text" name='address' placeholder="Full Address" className="input input-bordered input-secondary w-full max-w-xs" />
+                <input type="text" name='address' placeholder={updateProfile?.address} className="input input-bordered input-secondary w-full max-w-xs" />
 
-                <input type="text" name='linkedIn' placeholder="LinkedIn Profile Link" className="input input-bordered input-secondary w-full max-w-xs" />
+                <input type="text" name='linkedIn' placeholder={updateProfile?.linkedIn} className="input input-bordered input-secondary w-full max-w-xs" />
 
                 <input type="submit" value="Update" className="btn btn-primarybtn btn-primary text-white font-bold w-full max-w-xs" />
             </form>

@@ -49,8 +49,7 @@ const Purchase = () => {
                 else {
                     toast.error(`You Already Have Same Order on process...`)
                 }
-                // for cleaning the modal 
-                // setTreatment(null);
+
                 event.target.reset();
             });
     }
@@ -78,7 +77,7 @@ const Purchase = () => {
 
                     <input type="email" name='email' disabled value={user?.email || ''} className="input input-bordered input-secondary w-full max-w-xs" />
 
-                    <input type="number" name='quantity' value={product.minOrder} className="input input-bordered input-secondary w-full max-w-xs" required />
+                    <input type="number" name='quantity' placeholder={product.minOrder} min={product.minOrder} max={product.quantity} className="input input-bordered input-secondary w-full max-w-xs" required />
 
                     <input type="text" name='number' placeholder="Phone Number" className="input input-bordered input-secondary w-full max-w-xs" required />
 
