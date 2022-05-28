@@ -14,7 +14,7 @@ const Purchase = () => {
     // const [isReload, setIsReload] = useState(false);
 
     useEffect(() => {
-        const url = `http://localhost:5000/products/${productID}`;
+        const url = `https://fathomless-ocean-64226.herokuapp.com/products/${productID}`;
         fetch(url)
             .then(res => res.json())
             .then(data => setProduct(data));
@@ -34,7 +34,7 @@ const Purchase = () => {
             address: event.target.address.value,
         }
 
-        fetch('http://localhost:5000/booking', {
+        fetch('https://fathomless-ocean-64226.herokuapp.com/booking', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

@@ -13,7 +13,7 @@ const Payment = () => {
 
     const { id } = useParams();
 
-    const url = `http://localhost:5000/payment/${id}`;
+    const url = `https://fathomless-ocean-64226.herokuapp.com/payment/${id}`;
 
     const { data: order, isLoading } = useQuery(['payment', id], () => fetch(url, {
         method: 'GET',

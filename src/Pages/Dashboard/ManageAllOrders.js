@@ -4,7 +4,7 @@ import Loading from '../Shared/Loading';
 
 const ManageAllOrders = () => {
 
-    const { data: booking, isLoading} = useQuery('booking', () => fetch('http://localhost:5000/booking', {
+    const { data: booking, isLoading} = useQuery('booking', () => fetch('https://fathomless-ocean-64226.herokuapp.com/booking', {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`

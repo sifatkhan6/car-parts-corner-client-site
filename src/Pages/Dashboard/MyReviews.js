@@ -5,7 +5,7 @@ import Loading from '../Shared/Loading'
 
 const MyReviews = () => {
 
-    const { data: productNames, isLoading } = useQuery('onlyProduct', () => fetch('http://localhost:5000/singleProduct').then(res => res.json()))
+    const { data: productNames, isLoading } = useQuery('onlyProduct', () => fetch('https://fathomless-ocean-64226.herokuapp.com/singleProduct').then(res => res.json()))
 
     if (isLoading) {
         return <Loading></Loading>
@@ -21,7 +21,7 @@ const MyReviews = () => {
             review: event.target.review.value,
         }
 
-        fetch(`http://localhost:5000/review`, {
+        fetch(`https://fathomless-ocean-64226.herokuapp.com/review`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

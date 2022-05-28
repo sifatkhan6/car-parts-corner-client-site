@@ -21,7 +21,7 @@ const AddProduct = () => {
             email: user?.email
         }
 
-        axios.post('http://localhost:5000/products', addProduct)
+        axios.post('https://fathomless-ocean-64226.herokuapp.com/products', addProduct)
             .then(response => {
                 const { data } = response;
                 if (data.insertedId) {

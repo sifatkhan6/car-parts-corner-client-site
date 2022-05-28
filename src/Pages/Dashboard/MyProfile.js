@@ -10,7 +10,7 @@ const MyProfile = () => {
 
     const { email } = user.email;
 
-    const url = `http://localhost:5000/showUpdateProfile/${user.email}`;
+    const url = `https://fathomless-ocean-64226.herokuapp.com/showUpdateProfile/${user.email}`;
 
     const { data: infos, isLoading, refetch } = useQuery(['profile', { email }], () => fetch(url).then(res => res.json()));
 
@@ -30,7 +30,7 @@ const MyProfile = () => {
             linkedIn: event.target.linkedIn.value,
         }
 
-        fetch(`http://localhost:5000/updateProfile/${user.email}`, {
+        fetch(`https://fathomless-ocean-64226.herokuapp.com/updateProfile/${user.email}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'

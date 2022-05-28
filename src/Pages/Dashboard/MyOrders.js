@@ -12,7 +12,7 @@ const MyOrders = () => {
 
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:5000/booking/email?clientEmail=${user.email}`, {
+            fetch(`https://fathomless-ocean-64226.herokuapp.com/booking/email?clientEmail=${user.email}`, {
                 method: 'GET',
                 headers: {
                     'authorization': `bearer ${localStorage.getItem('accessToken')}`

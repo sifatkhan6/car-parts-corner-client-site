@@ -5,7 +5,7 @@ const ProductHook = () => {
     const [productDetails, setproductDetails] = useState([]);
 
     useEffect( () => {
-        fetch('http://localhost:5000/products')
+        fetch('https://fathomless-ocean-64226.herokuapp.com/products')
         .then(res => res.json())
         .then(data => setproductDetails(data))
     },[])
