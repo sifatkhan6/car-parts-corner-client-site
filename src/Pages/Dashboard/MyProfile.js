@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading'
@@ -8,33 +8,17 @@ const MyProfile = () => {
 
     const [user] = useAuthState(auth);
 
-    const [updateProfile, setUpdateProfile] = useState({});
+    const { email } = user.email;
 
-    // const [education] = updateProfile.map(item => item.education);
+    const url = `http://localhost:5000/showUpdateProfile/${user.email}`;
 
-    // // const [profile] = updateProfile;
+    const { data: infos, isLoading, refetch } = useQuery(['profile', { email }], () => fetch(url).then(res => res.json()));
 
-    // // console.log(updateProfile)
-    // console.log(education)
+    // console.log(infos?.address)
 
-    useEffect(() => {
-        if (user) {
-            fetch(`http://localhost:5000/showUpdateProfile/${user.email}`, {
-                method: 'GET',
-                headers: {
-                    'authorization': `bearer ${localStorage.getItem('accessToken')}`
-                }
-            })
-                .then(res => res.json())
-                .then(data => {
-                    setUpdateProfile(data)
-                })
-        }
-    }, [user])
-
-    // if (!updateProfile) {
-    //     return <Loading></Loading>
-    // }
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
     const handleUpdateProfile = event => {
         event.preventDefault();
@@ -57,6 +41,7 @@ const MyProfile = () => {
             .then(data => {
                 if (data.success) {
                     toast.success(`Successfully Updated Your Profile!`)
+                    event.target.reset();
                 }
                 else {
                     toast.error(`Failed to Update...`)
@@ -65,35 +50,41 @@ const MyProfile = () => {
     }
 
     return (
-        <div>
-            <h2 className='text-2xl font-bold text-primary text-center mt-8'>My Profile</h2>
-            <form className='grid grid-cols-1 gap-3 my-6 justify-items-center' onSubmit={handleUpdateProfile} >
-                <input type="text" name='name' disabled value={user?.displayName || ''} className="input input-bordered input-secondary w-full max-w-xs" />
+        <div className='grid gap-4 grid-cols-2'>
+            <div>
+                <h2 className='text-2xl font-bold text-primary text-center mt-8'>Update Profile</h2>
+                <form className='grid grid-cols-1 gap-3 my-6 justify-items-center' onSubmit={handleUpdateProfile} >
+                    <input type="text" name='name' disabled value={user?.displayName || ''} className="input input-bordered input-secondary w-full max-w-xs" />
 
-                <input type="email" name='email' disabled value={user?.email || ''} className="input input-bordered input-secondary w-full max-w-xs" />
+                    <input type="email" name='email' disabled value={user?.email || ''} className="input input-bordered input-secondary w-full max-w-xs" />
 
-                {/* {
-                    updateProfile.map(item => <>
-                        <input type="text" name='education' placeholder={item?.education} className="input input-bordered input-secondary w-full max-w-xs" />
+                    <input type="text" name='education' placeholder='Education' className="input input-bordered input-secondary w-full max-w-xs" />
 
-                        <input type="number" name='phone' placeholder={item?.number} className="input input-bordered input-secondary w-full max-w-xs" />
+                    <input type="number" name='phone' placeholder='Phone Number' className="input input-bordered input-secondary w-full max-w-xs" />
 
-                        <input type="text" name='address' placeholder={item?.address} className="input input-bordered input-secondary w-full max-w-xs" />
+                    <input type="text" name='address' placeholder='Address' className="input input-bordered input-secondary w-full max-w-xs" />
 
-                        <input type="text" name='linkedIn' placeholder={item?.linkedIn} className="input input-bordered input-secondary w-full max-w-xs" />
-                    </>)
-                } */}
+                    <input type="text" name='linkedIn' placeholder='LinkedIn Link' className="input input-bordered input-secondary w-full max-w-xs" />
 
-                <input type="text" name='education' placeholder={updateProfile?.education} className="input input-bordered input-secondary w-full max-w-xs" />
+                    <input type="submit" value="Update" className="btn btn-primarybtn btn-primary text-white font-bold w-full max-w-xs" />
+                </form>
+            </div>
 
-                <input type="number" name='phone' placeholder={updateProfile?.number} className="input input-bordered input-secondary w-full max-w-xs" />
+            <div>
+                <h2 className='text-2xl font-bold text-primary text-center mt-8'>Your Profile</h2>
 
-                <input type="text" name='address' placeholder={updateProfile?.address} className="input input-bordered input-secondary w-full max-w-xs" />
+                <form className='grid grid-cols-1 gap-3 my-6 justify-items-center'>
 
-                <input type="text" name='linkedIn' placeholder={updateProfile?.linkedIn} className="input input-bordered input-secondary w-full max-w-xs" />
+                    <input type="text" value={infos?.education} placeholder='Education' className="input input-bordered input-secondary w-full max-w-xs" />
 
-                <input type="submit" value="Update" className="btn btn-primarybtn btn-primary text-white font-bold w-full max-w-xs" />
-            </form>
+                    <input type="number" value={infos?.phone} placeholder='PhoneNumber' className="input input-bordered input-secondary w-full max-w-xs" />
+
+                    <input type="text" value={infos?.address} placeholder='Address' className="input input-bordered input-secondary w-full max-w-xs" />
+
+                    <input type="text" value={infos?.linkedIn} placeholder='LinkedIn Profile' className="input input-bordered input-secondary w-full max-w-xs" />
+                </form>
+
+            </div>
         </div>
     );
 };
