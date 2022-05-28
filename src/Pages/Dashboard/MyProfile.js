@@ -2,16 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
+import Loading from '../Shared/Loading'
 
 const MyProfile = () => {
 
     const [user] = useAuthState(auth);
 
-    const [updateProfile, setUpdateProfile] = useState([]);
+    const [updateProfile, setUpdateProfile] = useState({});
 
-    const {education} = {updateProfile};
+    // const [education] = updateProfile.map(item => item.education);
 
-    console.log(education)
+    // // const [profile] = updateProfile;
+
+    // // console.log(updateProfile)
+    // console.log(education)
 
     useEffect(() => {
         if (user) {
@@ -27,6 +31,10 @@ const MyProfile = () => {
                 })
         }
     }, [user])
+
+    // if (!updateProfile) {
+    //     return <Loading></Loading>
+    // }
 
     const handleUpdateProfile = event => {
         event.preventDefault();
@@ -63,6 +71,18 @@ const MyProfile = () => {
                 <input type="text" name='name' disabled value={user?.displayName || ''} className="input input-bordered input-secondary w-full max-w-xs" />
 
                 <input type="email" name='email' disabled value={user?.email || ''} className="input input-bordered input-secondary w-full max-w-xs" />
+
+                {/* {
+                    updateProfile.map(item => <>
+                        <input type="text" name='education' placeholder={item?.education} className="input input-bordered input-secondary w-full max-w-xs" />
+
+                        <input type="number" name='phone' placeholder={item?.number} className="input input-bordered input-secondary w-full max-w-xs" />
+
+                        <input type="text" name='address' placeholder={item?.address} className="input input-bordered input-secondary w-full max-w-xs" />
+
+                        <input type="text" name='linkedIn' placeholder={item?.linkedIn} className="input input-bordered input-secondary w-full max-w-xs" />
+                    </>)
+                } */}
 
                 <input type="text" name='education' placeholder={updateProfile?.education} className="input input-bordered input-secondary w-full max-w-xs" />
 
