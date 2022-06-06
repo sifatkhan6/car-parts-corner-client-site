@@ -5,6 +5,7 @@ Admin email: test@xyz.com || pass: 123456
 https://sunny-medovik-11f4a8.netlify.app
 
 ### Server site link
+https://github.com/sifatkhan6/car-parts-corner-server-site
 
 ## What I have in this project
 - install react app
